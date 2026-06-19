@@ -35,7 +35,6 @@ POLICE_RECORD_CODE = "32061102000343"  # 公安备案编号
 
 MENUITEMS = ( 
     ('GitHub', 'https://github.com/ywyz'),
-    ('About', '/about.html'),
     )
 # HTML metadata
 SITEDESCRIPTION = ''
