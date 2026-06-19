@@ -1,0 +1,38 @@
+name: Deploy Pelican Site to VPS
+
+on:
+  push:
+    branches: ["main"] # 或你的默认分支，如 master
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pelican[markdown]  # 如果你用Markdown写作
+          # 如果你的项目有 requirements.txt，也可以用：
+          # pip install -r requirements.txt
+
+      - name: Build the site
+        run: pelican content -o output -s pelicanconf.py
+
+      - name: Deploy to VPS via rsync
+        uses: easingthemes/ssh-deploy@v4
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.VPS_SSH_KEY }}
+          ARGS: "-rlgoDzvc -i --delete"
+          SOURCE: "output/"
+          REMOTE_HOST: ${{ secrets.VPS_HOST }}
+          REMOTE_USER: "ecs-user" # 修改为你的VPS用户名
+          TARGET: "/var/www/ywyz.tech" # 与Caddyfile中的root路径一致
+          EXCLUDE: "/.git/"
