@@ -33,4 +33,4 @@ DEFAULT_PAGINATION = 10
 
 # Uncomment following line if you want document-relative URLs when developing
 # RELATIVE_URLS = True
-THEME="/home/admin/code/blog/pelican-themes/blue-penguin-dark"
+THEME="pelican-themes/blue-penguin-dark"
