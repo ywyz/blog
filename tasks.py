@@ -23,7 +23,7 @@ CONFIG = {
     "deploy_path": SETTINGS["OUTPUT_PATH"],
     # Remote server configuration
     "ssh_user": "ecs-user",
-    "ssh_host": "aliyun",
+    "ssh_host": "aliyun.ywyz.tech",
     "ssh_port": "22",
     "ssh_path": "/var/www/ywyz.tech",
     # Host and port for `serve`

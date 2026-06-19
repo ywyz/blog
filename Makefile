@@ -8,7 +8,7 @@ OUTPUTDIR=$(BASEDIR)/output
 CONFFILE=$(BASEDIR)/pelicanconf.py
 PUBLISHCONF=$(BASEDIR)/publishconf.py
 
-SSH_HOST=aliyun
+SSH_HOST=aliyun.ywyz.tech
 SSH_PORT=22
 SSH_USER=ecs-user
 SSH_TARGET_DIR=/var/www/ywyz.tech
