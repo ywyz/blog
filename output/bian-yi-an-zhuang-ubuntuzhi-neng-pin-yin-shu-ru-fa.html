@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+        <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>ywyz's blog | 编译安装ubuntu智能拼音输入法</title>
+    <link rel="shortcut icon" type="image/png" href="/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/theme/css/main.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
+    <style> 
+    @media (prefers-color-scheme: light) {
+        :root {
+            --main-bg-color: #FFFFFF;
+            --accent-color: #FFFFFF;
+            --tab-bg-hover: #d3d3d3;
+            --info-bg-color: #CCC;
+        }
+    }
+    </style>
+    <meta name="generator" content="Pelican" />
+    <meta name="description" content="" />
+    <meta name="author" content="ywyz" />
+
+    <meta name="keywords" content="无影云电脑,Ubuntu，编译，输入法" />
+</head>
+<body>
+    <header>
+        <nav style="overflow: hidden;">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/pages/guan-yu-wo.html">关于我</a></li>
+                <li><a href="https://github.com/ywyz">GitHub</a></li>
+                <li><a href="/tags">Tags</a></li>
+                <li><a href="/authors">Authors</a></li>
+                <li><a href="/categories">Categories</a></li>
+                <li><a href="/archives">Archives</a></li>
+            </ul>
+        </nav>
+        <div class="header_box" style="height: 50px">
+        <h1><a href="/">
+            <image src='' class="avatar" width="50px" /><span class="site_title">ywyz's blog</span>
+            </a></h1></div>
+        </div>
+    </header>
+    <div id="wrapper">
+        <div id="content">            <h4 class="date">6月 19, 2026</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="/bian-yi-an-zhuang-ubuntuzhi-neng-pin-yin-shu-ru-fa.html" rel="bookmark" title="Permanent Link to &quot;编译安装ubuntu智能拼音输入法&quot;">编译安装ubuntu智能拼音输入法</a>
+                </h2>
+
+                
+                
+
+                <h1>缘起</h1>
+<p>Windows中习惯了微软拼音，实在习惯不了还可以搜狗、QQ、百度 and so on。可是Ubuntu系统不行。很多输入法不提供Linux版本，提供的看样子也都在deepin里面。搜狗提供的，但是版本太旧，还需要安装fcitx4 ，可是现在Ubuntu24.04 已经到了fcitx5了，我就得大改系统，还不一定能成功。</p>
+<p>这不就类似于为了路上的韭菜买了一套房子吗？不乐意了。翻一翻系统自带智能拼音，还带有云输入，挺好挺好。</p>
+<p>不过一翻软件关于，点击github仓库一看，居然不是最新版本的，可是ubuntu自带软件仓库里面并没有呀。滞后了怎么办，开启了我这辈子第一次还是第二次编译安装的路</p>
+<h1>做好安装准备</h1>
+<p>首先得做好安装环境的准备。</p>
+<h2>卸载旧版</h2>
+<div class="highlight"><pre><span></span><code><span class="c1">#卸载旧版</span>
+sudo<span class="w"> </span>apt<span class="w"> </span>remove<span class="w"> </span><span class="s1">&#39;libpinyin*&#39;</span>
+sudo<span class="w"> </span>apt<span class="w"> </span>remove<span class="w"> </span><span class="s1">&#39;ibus-libpinyin&#39;</span>
+</code></pre></div>
+
+<h2>安装环境</h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># 安装环境</span>
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>libibus-1.0-dev
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>libdb-dev
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>libsqlite3-dev
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>sqlite3
+<span class="c1"># 根据我的安装过程还需要安装</span>
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>libsoup-3.0-dev
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>libjson-glib-dev
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>libnotify-dev
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>gnome-common<span class="w"> </span>
+</code></pre></div>
+
+<h2>下载软件</h2>
+<div class="highlight"><pre><span></span><code>wget<span class="w"> </span>&lt;https://github.com/libpinyin/libpinyin/releases/download/2.10.3/libpinyin-2.10.3.tar.gz&gt;
+wget<span class="w"> </span>&lt;https://github.com/libpinyin/ibus-libpinyin/releases/download/1.16.5/ibus-libpinyin-1.16.5.tar.gz&gt;
+
+tar<span class="w"> </span>zxvf<span class="w"> </span>libpinyin-2.10.3.tar.gz
+tar<span class="w"> </span>zxvf<span class="w"> </span>ibus-libpinyin-1.16.5.tar.gz
+
+<span class="c1"># 可以根据github上面最新的链接修改</span>
+</code></pre></div>
+
+<h1>编译安装</h1>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>libpinyin-2.10.3/
+./configure<span class="w"> </span>--prefix<span class="o">=</span>/usr
+make
+sudo<span class="w"> </span>make<span class="w"> </span>install-strip
+<span class="nb">cd</span><span class="w"> </span>..
+
+<span class="nb">cd</span><span class="w"> </span>ibus-libpibtyin-1.16.5
+./autogen.sh<span class="w"> </span>--prefix<span class="o">=</span>/usr<span class="w"> </span>--enable-cloud-input-mode<span class="w"> </span><span class="c1"># 开启云输入</span>
+make
+sudo<span class="w"> </span>make-install
+</code></pre></div>
+
+<p>接下来重启电脑，就能享受最新版的ibus智能拼音了。</p>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="/bian-yi-an-zhuang-ubuntuzhi-neng-pin-yin-shu-ru-fa.html">posted at 21:22</a>
+                    &nbsp;&middot;&nbsp;<a href="/category/ji-zhu.html" rel="tag">技术</a>
+                    &nbsp;&middot;
+                    &nbsp;<a href="/tag/wu-ying-yun-dian-nao.html" class="tags">无影云电脑</a>
+                    &nbsp;<a href="/tag/ubuntubian-yi-shu-ru-fa.html" class="tags">Ubuntu，编译，输入法</a>
+                </div>
+            </article>
+            <div class="clear"></div>
+            <footer>
+                <div class="备案信息">
+                    <p class="beian-item"><a href="https://beian.miit.gov.cn/#/Integrated/recordQuery" target="_blank">苏ICP备2021006823号-1</a></p>
+                    <p class="beian-item">
+                        <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=32061102000343" target="_blank">
+                            <img src="https://beian.mps.gov.cn/img/logo01.dd7ff50e.png" 
+                                alt="公安备案图标" class="beian-police-icon">
+                            苏公网安备32061102000343号
+                        </a>
+                    </p>
+                </div>
+            </footer>
+        </div>
+        <div class="clear"></div>
+    </div>
+</body>
+</html>
