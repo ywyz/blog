@@ -33,4 +33,8 @@ DEFAULT_PAGINATION = 10
 
 # Uncomment following line if you want document-relative URLs when developing
 # RELATIVE_URLS = True
-THEME="themes/blue-penguin-dark"
+THEME = "themes/blue-penguin-dark"
+
+ICP = "苏ICP备2021006823号-1"      # ICP备案号
+POLICE = "苏公网安备32061102000343号"  # 公安备案号[reference:0]
+POLICE_RECORD_CODE = "32061102000343"  # 公安备案编号

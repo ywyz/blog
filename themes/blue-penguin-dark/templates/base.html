@@ -97,18 +97,20 @@
             {% if DISPLAY_FOOTER or DISPLAY_FOOTER is not defined %}
             <div class="clear"></div>
             <footer>
-                <p>
-                <a href="https://github.com/tcarwash/blue-penguin-dark">Blue Penguin Dark</a> Theme
-                &middot;
-                Powered by <a href="http://getpelican.com">Pelican</a>
-                 {% if FEED_ALL_ATOM %}
-                &middot;
-                <a href="{{ SITEURL }}/{{ FEED_ALL_ATOM }}" rel="alternate">Atom Feed</a>
-                 {% endif %}
-                 {% if FEED_ALL_RSS %}
-                &middot;
-                <a href="{{ SITEURL }}/{{ FEED_ALL_RSS }}" rel="alternate">Rss Feed</a>
-                 {% endif %}
+                <div class="备案信息">
+                    {% if ICP %}
+                    <p class="beian-item"><a href="https://beian.miit.gov.cn/#/Integrated/recordQuery" target="_blank">{{ ICP }}</a></p>
+                    {% endif %}
+                    {% if POLICE %}
+                    <p class="beian-item">
+                        <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode={{ POLICE_RECORD_CODE }}" target="_blank">
+                            <img src="https://beian.mps.gov.cn/img/logo01.dd7ff50e.png" 
+                                alt="公安备案图标" class="beian-police-icon">
+                            {{ POLICE }}
+                        </a>
+                    </p>
+                    {% endif %}
+                </div>
             </footer>
             {% endif %}
         </div>

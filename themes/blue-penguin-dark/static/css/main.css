@@ -378,6 +378,36 @@ footer {
 }
 footer p { margin: 0; }
 
+.备案信息 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: nowrap;
+}
+
+.备案信息 .beian-item {
+    margin: 0;
+}
+
+.备案信息 .beian-item a {
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.备案信息 .beian-police-icon {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 5px 0 0;
+    margin-top: 0;
+    height: 20px;
+    width: auto;
+    max-width: none;
+    box-shadow: none;
+    border-radius: 0;
+}
+
 .right { float: right; }
 
 .clear { clear: both; }
@@ -410,6 +440,10 @@ footer p { margin: 0; }
     }
     nav ul {
         margin: 0 0 1em 0;
+    }
+
+    .备案信息 {
+        flex-wrap: wrap;
     }
 }
 @media print {
